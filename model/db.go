@@ -5,6 +5,7 @@ import (
     "gorm.io/gorm/logger"
     "gorm.io/gorm/schema"
     "os"
+    "time"
 
     "gorm.io/driver/mysql"
     "gorm.io/gorm"
@@ -39,5 +40,18 @@ func InitDB() {
         fmt.Println("连接数据库失败，请检查参数：", err)
         os.Exit(1)
     }
+
+    // 迁移数据表，在没有数据表结构变更时候，建议注释不执行
+    _ = db.AutoMigrate(&User{}, &Article{}, &Category{}, Profile{}, Comment{})
+
+    sqlDB, _ := db.DB()
+    // SetMaxIdleConns 设置连接池中的最大闲置连接数
+    sqlDB.SetMaxIdleConns(10)
+
+    // SetMaxOpenConns 设置数据库的最大连接数
+    sqlDB.SetMaxOpenConns(100)
+
+    // SetConnMaxLifetime 设置连接的最大可复用时间
+    sqlDB.SetConnMaxLifetime(10 * time.Second)
 
 }
