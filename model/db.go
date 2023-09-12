@@ -2,13 +2,13 @@ package model
 
 import (
     "fmt"
-    "gorm.io/gorm/logger"
-    "gorm.io/gorm/schema"
     "os"
     "time"
 
     "gorm.io/driver/mysql"
     "gorm.io/gorm"
+    "gorm.io/gorm/logger"
+    "gorm.io/gorm/schema"
 
     "github.com/hd2yao/ginblog/utils"
 )

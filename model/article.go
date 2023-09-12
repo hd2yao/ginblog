@@ -1,8 +1,9 @@
 package model
 
 import (
-    "github.com/hd2yao/ginblog/utils/err_msg"
     "gorm.io/gorm"
+
+    "github.com/hd2yao/ginblog/utils/err_msg"
 )
 
 type Article struct {
